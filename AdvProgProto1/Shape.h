@@ -13,4 +13,5 @@ public:
 	virtual void calculateArea() = 0;
 	virtual void calculatePoints() = 0;
 	virtual void calculatePerimeter() = 0;
+	virtual void toString() = 0;
 };

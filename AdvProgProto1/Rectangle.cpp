@@ -45,13 +45,10 @@ void Rectangle::move(int newX, int newY) {
 
 	leftTop->setX(newX);
 	leftTop->setY(newY);
-	calculatePoints();
-	toString();
 }
 void Rectangle::scale(float scaleX, float scaleY) {
 	width *= scaleX;
 	height *= scaleY;
-	toString();
 }
 
 Rectangle::Rectangle(int x, int y, int h, int w) : height(h), width(w){

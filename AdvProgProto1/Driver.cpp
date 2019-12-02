@@ -33,6 +33,7 @@ int main()
 	vector <Shape*> shapes;     // this one will hold your shapes
 	vector <string> parameters; // this one will hold parameters for the commands
 
+	
 
 	while (userCommand.compare("exit") != 0)
 	{
@@ -41,10 +42,6 @@ int main()
 		getline(cin, userCommand);
 		char* cstr = new char[userCommand.length() + 1];
 		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
-
-
-
-
 
 		char* next_token;
 		char* token = strtok_s(cstr, " ", &next_token);
@@ -67,17 +64,24 @@ int main()
 
 		if (command.compare("addR") == 0) {
 
-			x = stoi(parameters[1].c_str()); 
-			y = stoi(parameters[2].c_str());
-			int h = stoi(parameters[3].c_str());
-			int w = stoi(parameters[4].c_str());
-			
+			if (parameters.size()== 5) {
+
+				x = stoi(parameters[1].c_str());
+				y = stoi(parameters[2].c_str());
+				int h = stoi(parameters[3].c_str());
+				int w = stoi(parameters[4].c_str());
+				Rectangle* r = new Rectangle(x, y, h, w);
+				shapes.push_back(r);
+				r->toString();
+			}
+			else {
+				cout << "Requires x, y, height, width as paramaters. please retry." << endl;
+			}
 
 
 
-			Rectangle* r = new Rectangle(x, y, h, w);
-			shapes.push_back(r);
-			r->toString();
+
+
 			// cout overload here; 
 		}
 		
@@ -107,19 +111,21 @@ int main()
 		else if (command.compare("scale") == 0) {
 			int index = stoi(parameters[1].c_str());
 			int scaleX = stoi(parameters[2].c_str());
-			int scaleY = stoi(parameters[2].c_str());
+			int scaleY = stoi(parameters[3].c_str());
 
-
-				Movable* m = dynamic_cast<Movable*>(shapes[index-1]);
-				
-				if (scaleX != scaleY)
-				{
-					cout << "chosen object scale function requires istropic parameters. scaling to X only.";
-					m->scale(scaleX, scaleX);
-				}
-				else { m->scale(scaleX, scaleY); }
-
+			if (index-1 >= 0)
+			{
+				Movable* m = dynamic_cast<Movable*>(shapes[index - 1]);
+				 
+				m->scale(scaleX, scaleY);
 				shapes[index - 1]->toString();
+			}
+				
+				
+				
+				
+
+				
 
 
 

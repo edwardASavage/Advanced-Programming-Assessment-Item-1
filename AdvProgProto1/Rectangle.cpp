@@ -25,20 +25,22 @@ void Rectangle::calculatePoints() {
 }
 
 void Rectangle::calculatePerimeter() {
-	perimeter = ((height * 2) + (width * 2));
+	perimeter = (((double)height * 2) + ((double)width * 2));
 }
 
 void Rectangle::toString() {
-	calculateArea();
 	calculatePoints();
-	cout << "points:[ ("
-		// points overfilling on move() call. (points[4 to 8] added).
-		<< points[0]->getX() << "," << points[0]->getY() << ") ("
-		<< points[1]->getX() << "," << points[1]->getY() << ") ("
-		<< points[2]->getX() << "," << points[2]->getY() << ") ("
-		<< points[3]->getX() << "," << points[3]->getY() << ") ] "
-		<< " height: " << height << " width: " << width
-		<< " area: " << area << endl;
+	calculateArea();
+	calculatePerimeter();
+
+	cout << "Rectangle[h=" << height << ",w=" << width << "]"
+		<< "\npoints[("
+		<< points[0]->getX() << "," << points[0]->getY() << ")("
+		<< points[1]->getX() << "," << points[1]->getY() << ")("
+		<< points[2]->getX() << "," << points[2]->getY() << ")("
+		<< points[3]->getX() << "," << points[3]->getY() << ")]"
+		<< "\narea=" << area << " Perimeter=" << perimeter << endl;
+
 		cout << "" << endl;
 }
 void Rectangle::move(int newX, int newY) {

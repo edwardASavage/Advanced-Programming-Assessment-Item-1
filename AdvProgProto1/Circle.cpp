@@ -25,33 +25,34 @@ void Circle::calculatePerimeter() {
 }
 
 void Circle::toString() {
-	cout << "points:[ ("
-		// points overfilling on move() call. (points[4 to 8] added).
-		<< points[0]->getX() << "," << points[0]->getY() << ") ("
-		<< points[1]->getX() << "," << points[1]->getY() << ") ] "
-		<< "radius: " << radius << " area: " << area << endl;
+	calculatePoints();
+	calculateArea();
+	calculatePerimeter();
+
+	cout << "Circle[r=" << radius << "]"
+		<< "\npoints[("
+
+		<< points[0]->getX() << "," << points[0]->getY() << ")("
+		<< points[1]->getX() << "," << points[1]->getY() << ")]"
+		<< "\narea=" << area << " Perimeter=" << perimeter << endl;
 	cout << "" << endl;
 }
 
 void Circle::move(int newX, int newY) {
 	leftTop->setX(newX);
 	leftTop->setY(newY);
-	calculatePoints();
-	toString();
 }
 
 void Circle::scale(float scaleX, float scaleY) {
-	if (!(scaleX == scaleY)) { cout << "X and Y scale different, shape will not be circle ... scaling to X only." << endl; }
-	radius *= scaleX;
-	calculateArea();
-	calculatePoints();
-	toString();
+	if (scaleX != scaleY)
+	{
+		cout << "Circle requires isotropic functionality. only scaleX parameter used." << endl;
+		radius *= scaleX;
+	}
 
 }
 
 Circle::Circle(int x, int y, int r) : radius(r) {
 	leftTop->setX(x);
 	leftTop->setY(y);
-	calculateArea();
-	calculatePoints();
 }

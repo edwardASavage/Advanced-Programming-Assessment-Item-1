@@ -14,7 +14,14 @@ void Square::calculateArea() { area = (double)edge * (double)edge; };
 
 void Square::calculatePerimeter() { perimeter = edge * 4; }
 
-void Square::scale(float scaleX, float scaleY) { edge *= scaleX; }
+void Square::scale(float scaleX, float scaleY) {
+
+	if (scaleX != scaleY)
+	{
+		cout << "Square requires isotropic functionality. only scaleX parameter used." << endl;
+		edge *= scaleX;
+	}
+}
 
 void Square::move(int newX, int newY) {
 	leftTop->setX(newX);
@@ -38,14 +45,17 @@ void Square::calculatePoints() {
 }
 
 void Square::toString() {
-	calculatePerimeter();
-	calculateArea();
 	calculatePoints();
-	cout << "points:[ ("
-		<< points[0]->getX() << "," << points[0]->getY() << ") ("
-		<< points[1]->getX() << "," << points[1]->getY() << ") ("
-		<< points[2]->getX() << "," << points[2]->getY() << ") ("
-		<< points[3]->getX() << "," << points[3]->getY() << ") ] "
-		<< " edge: " << edge << " area: " << area << " perimeter: " << perimeter << endl;
+	calculateArea();
+	calculatePerimeter();
+
+
+	cout << "Square[e=" << edge << "]"
+		<< "\npoints[("
+		<< points[0]->getX() << "," << points[0]->getY() << ")("
+		<< points[1]->getX() << "," << points[1]->getY() << ")("
+		<< points[2]->getX() << "," << points[2]->getY() << ")("
+		<< points[3]->getX() << "," << points[3]->getY() << ")]"
+		<< "\narea=" << area << " Perimeter=" << perimeter << endl;
 	cout << "" << endl;
 }

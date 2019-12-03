@@ -1,26 +1,9 @@
-/* ------------------------------------------------------
-CMP2801M: Advanced Programming
-Driver program for assignment
-Fall 2019
-
-Written by Ayse Kucukyilmaz
-
-This file is a representative test file.
-During marking, we will use the exact same notation
-as provided in the brief, so make sure
-you follow that guideline. Also make sure that you don't
-change the main body provided to you here.
-Otherwise, your code may not pass the test cases...
-
-GOOD LUCK!
-
------------------------------------------------------- */
-
 #include "Shape.h"
 #include "Circle.h"
 #include "Rectangle.h"
 #include "Square.h"
 #include "Movable.h"
+#include <typeinfo>
 
 #include <iostream>
 #include <string>
@@ -33,11 +16,12 @@ int main()
 	vector <Shape*> shapes;     // this one will hold your shapes
 	vector <string> parameters; // this one will hold parameters for the commands
 
-	
+
+
 
 	while (userCommand.compare("exit") != 0)
 	{
-		
+
 		cout << "Enter the command: ";
 		getline(cin, userCommand);
 		char* cstr = new char[userCommand.length() + 1];
@@ -46,12 +30,12 @@ int main()
 		char* next_token;
 		char* token = strtok_s(cstr, " ", &next_token);
 
-		while (token!=NULL)
+		while (token != NULL)
 		{
 			parameters.push_back(token);
-			token = strtok_s(NULL , " " , &next_token);
+			token = strtok_s(NULL, " ", &next_token);
 		}
-		
+
 		// implement a string tokenizer to populate the parameters vector 
 		// check function strtok_s
 
@@ -64,7 +48,7 @@ int main()
 
 		if (command.compare("addR") == 0) {
 
-			if (parameters.size()== 5) {
+			if (parameters.size() == 5) {
 
 				x = stoi(parameters[1].c_str());
 				y = stoi(parameters[2].c_str());
@@ -72,30 +56,26 @@ int main()
 				int w = stoi(parameters[4].c_str());
 				Rectangle* r = new Rectangle(x, y, h, w);
 				shapes.push_back(r);
+
 				r->toString();
 			}
 			else {
 				cout << "Requires x, y, height, width as paramaters. please retry." << endl;
 			}
-
-
-
-
-
 			// cout overload here; 
 		}
-		
+
 		else if (command.compare("addS") == 0) {
 			// get parameters
-			x = stoi(parameters[1].c_str()); 
+			x = stoi(parameters[1].c_str());
 			y = stoi(parameters[2].c_str());
 			int e = stoi(parameters[3].c_str());
 			Square* s = new Square(x, y, e);
 			shapes.push_back(s);
 			s->toString();
-			 // cout overload here;
+			cout << s;
 		}
-		
+
 		if (command.compare("addC") == 0) {
 			// get parameters
 			x = stoi(parameters[1].c_str());
@@ -104,43 +84,59 @@ int main()
 			Circle* c = new Circle(x, y, r);
 			shapes.push_back(c);
 			c->toString();
+			cout << c;
 			// cout << c->toString();
 
 		}
-		
+
 		else if (command.compare("scale") == 0) {
 			int index = stoi(parameters[1].c_str());
-			int scaleX = stoi(parameters[2].c_str());
-			int scaleY = stoi(parameters[3].c_str());
+			float scaleX = stoi(parameters[2].c_str());
+			float scaleY = stoi(parameters[3].c_str());
 
-			if (index-1 >= 0)
+			int error = 0;
+			try
 			{
-				Movable* m = dynamic_cast<Movable*>(shapes[index - 1]);
-				 
-				m->scale(scaleX, scaleY);
-				shapes[index - 1]->toString();
+				Shape* s = (shapes[index - 1]);
+
+				if (index-1 < 0 )
+				{
+					throw (error);
+				}
+
+				if (dynamic_cast<Square*>(s) != NULL)
+				{
+					cout << "Scaling object Square...\n";
+					dynamic_cast<Square*>(s)->scale(scaleX, scaleY);
+				}
+				else if (dynamic_cast<Rectangle*>(s) != NULL) {
+					cout << "Scaling object Rectangle...\n";
+					dynamic_cast<Rectangle*>(s)->scale(scaleX, scaleY);
+				}
+				else if (dynamic_cast<Circle*>(s) != NULL) {
+					dynamic_cast<Circle*>(s)->scale(scaleX, scaleY);
+				}
+
+				// check what type of shape, then scale
+
+				//s->scale(scaleX, scaleY);
+				//shapes[index - 1]->toString();
+				cout << shapes[index - 1];
 			}
-				
-				
-				
-				
-
-				
-
-
-
-			// scale object at index... the scaling needs to be isotropic in case of circle and square 
-			// you may want to check if the index exists or not!
-
-			// Multiple inhertitance is tricky! The Shape class does nto have a scale function, the Movable does!
-			// As a result all your derived classes have scale functions... 
-			// You may need to use type casting wisely to use polymorphic functionality!
+			catch (int error) {
+				cout << " cannot access member at location :" << index - 1 << "." << endl;
+			}
+			catch(...)
+			{
+				cout << " cannot access member at location :" << index-1 << "." << endl;
+			}
+			
 
 		}
-		
+
 		else if (command.compare("move") == 0) {
 			// move object at index 
-			int shapeNo= stoi(parameters[1].c_str());
+			int shapeNo = stoi(parameters[1].c_str());
 			int newX = stoi(parameters[2].c_str());
 			int newY = stoi(parameters[3].c_str());
 			// you may want to check if the index exists or not!
@@ -148,8 +144,9 @@ int main()
 			// Study the following code. A Shape object is not Movable, but all derived classes are...
 			// you can't automatically type cast from a Shape to a Movable, but you can force a downcasting
 			Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
+
 			m->move(newX, newY);
-			
+
 			shapes[shapeNo - 1]->toString();
 		}
 		else if (command.compare("display") == 0) {
@@ -170,6 +167,5 @@ int main()
 
 	cout << "Press any key to continue...";
 	std::getchar();
-
 	return 0;
 }

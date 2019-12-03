@@ -1,6 +1,7 @@
 #pragma once
 #include "Shape.h"
 #include "Movable.h"
+#include <iostream>
 
 class Rectangle : public Shape, public Movable {
 private:
@@ -16,5 +17,8 @@ public:
 	void scale(float scaleX, float scaleY);
 
 	Rectangle(int x, int y, int height, int width);
+
+	friend ostream& operator<<(ostream& out, Rectangle* s);
+	
 
 };

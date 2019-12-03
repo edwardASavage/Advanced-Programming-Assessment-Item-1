@@ -38,10 +38,11 @@ void Square::calculatePoints() {
 
 	// rightTop
 	points.push_back(new Point(x + edge, y));
-	//leftBottom
-	points.push_back(new Point(x, y + edge));
+
 	//rightBottom
 	points.push_back(new Point(x + edge, y + edge));
+	//leftBottom
+	points.push_back(new Point(x, y + edge));
 }
 
 void Square::toString() {
@@ -58,4 +59,22 @@ void Square::toString() {
 		<< points[3]->getX() << "," << points[3]->getY() << ")]"
 		<< "\narea=" << area << " Perimeter=" << perimeter << endl;
 	cout << "" << endl;
+}
+
+ostream& operator<<(ostream& out, Square* s)
+{
+	s->calculatePoints();
+	s->calculateArea();
+	s->calculatePerimeter();
+
+
+	out <<  "Square[e=" << s->edge << "]"
+		<< "\npoints[("
+		<< s->points[0]->getX() << "," << s->points[0]->getY() << ")("
+		<< s->points[1]->getX() << "," << s->points[1]->getY() << ")("
+		<< s->points[2]->getX() << "," << s->points[2]->getY() << ")("
+		<< s->points[3]->getX() << "," << s->points[3]->getY() << ")]"
+		<< "\narea=" << s->area << " Perimeter=" << s->perimeter <<"\n"<< endl;
+
+	return out;
 }

@@ -6,23 +6,21 @@ using namespace std;
 
 
 void Circle::calculateArea() {
-	area = radius;
+	area = M_PI* (radius*radius);
 }
 
 void Circle::calculatePoints() {
 	int x = leftTop->getX();
 	int y = leftTop->getY();
-	points.clear();
-	// leftTop
 	points.push_back(new Point(x, y));
-
-	// rightBottom
-	points.push_back(new Point(x + radius, y));
+	// rightBottom, casted to int.
+	points.push_back(new Point((int)x + (2*radius), (int)y + (2*radius)));
 }
 
 void Circle::calculatePerimeter() {
-	perimeter = M_PI * (radius * 2);
+	perimeter = M_PI * (2*radius);
 }
+
 
 void Circle::toString() {
 	calculatePoints();
@@ -47,12 +45,29 @@ void Circle::scale(float scaleX, float scaleY) {
 	if (scaleX != scaleY)
 	{
 		cout << "Circle requires isotropic functionality. only scaleX parameter used." << endl;
-		radius *= scaleX;
 	}
+	radius *= scaleX;
 
 }
 
 Circle::Circle(int x, int y, int r) : radius(r) {
 	leftTop->setX(x);
 	leftTop->setY(y);
+}
+
+
+ostream& operator<<(ostream& out,  Circle* c)
+{
+	c->calculatePoints();
+	c->calculateArea();
+	c->calculatePerimeter();
+
+	out << "Circle[r=" << c->radius << "]"
+		<< "\npoints[("
+
+		<< c->points[0]->getX() << "," << c->points[0]->getY() << ")("
+		<< c->points[1]->getX() << "," << c->points[1]->getY() << ")]"
+		<< "\narea=" << c->area << " Perimeter=" << c->perimeter << "\n" << endl;
+
+	return out;
 }

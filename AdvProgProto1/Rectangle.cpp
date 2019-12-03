@@ -21,7 +21,6 @@ void Rectangle::calculatePoints() {
 	points.push_back(new Point(x + width, y + height));
 	//leftBottom
 	points.push_back(new Point(x , y + height));
-
 }
 
 void Rectangle::calculatePerimeter() {
@@ -49,12 +48,25 @@ void Rectangle::move(int newX, int newY) {
 	leftTop->setY(newY);
 }
 void Rectangle::scale(float scaleX, float scaleY) {
-	width *= scaleX;
-	height *= scaleY;
+	width *= scaleY;
+	height *= scaleX;
 }
 
 Rectangle::Rectangle(int x, int y, int h, int w) : height(h), width(w){
 	leftTop->setX(x);
 	leftTop ->setY(y);
 
+}
+
+ostream& operator<<(ostream& out, Rectangle* r)
+{
+	out << "Rectangle[h=" << r->height << ",w=" << r->width << "]"
+		<< "\npoints[("
+		<< r->points[0]->getX() << "," << r->points[0]->getY() << ")("
+		<< r->points[1]->getX() << "," << r->points[1]->getY() << ")("
+		<< r->points[2]->getX() << "," << r->points[2]->getY() << ")("
+		<< r->points[3]->getX() << "," << r->points[3]->getY() << ")]"
+		<< "\narea=" << r->area << " Perimeter=" << r->perimeter << endl;
+
+	return out;
 }

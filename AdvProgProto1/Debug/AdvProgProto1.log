@@ -1,9 +1,5 @@
-﻿  Circle.cpp
-  Square.cpp
-C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Circle.cpp(20,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Square.cpp(40,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Square.cpp(42,34): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Square.cpp(44,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Square.cpp(44,31): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+﻿  Driver.cpp
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(94,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(95,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(126,15): warning C4101: 'error': unreferenced local variable
   AdvProgProto1.vcxproj -> C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\Debug\AdvProgProto1.exe

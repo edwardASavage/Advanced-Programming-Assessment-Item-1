@@ -55,10 +55,6 @@ Circle::Circle(int x, int y, int r) : radius(r) {
 	leftTop->setY(y);
 }
 
-Circle::~Circle()
-{
-}
-
 
 ostream& operator<<(ostream& out,  Circle* c)
 {

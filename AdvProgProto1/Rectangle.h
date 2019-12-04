@@ -5,8 +5,8 @@
 
 class Rectangle : public Shape, public Movable {
 private:
-	int height;
-	int width;
+	float height;
+	float width;
 public:
 
 	void calculateArea();
@@ -17,6 +17,7 @@ public:
 	void scale(float scaleX, float scaleY);
 
 	Rectangle(int x, int y, int height, int width);
+	~Rectangle();
 
 	friend ostream& operator<<(ostream& out, Rectangle* s);
 	

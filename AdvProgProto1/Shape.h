@@ -5,8 +5,8 @@ using namespace std;
 
 class Shape {
 protected:
-	double area;
-	double perimeter;
+	float area = 0;
+	float perimeter= 0;
 	Point* leftTop = new Point(0,0);
 	vector<Point*> points;
 public:

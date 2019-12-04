@@ -5,7 +5,7 @@
 
 class Circle : public Shape, public Movable {
 private:
-	double radius;
+	float radius;
 public:
 
 	void calculateArea();

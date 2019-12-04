@@ -6,7 +6,7 @@ using namespace std;
 
 
 void Circle::calculateArea() {
-	area = M_PI* (radius*radius);
+	area = (float)M_PI * (radius*radius);
 }
 
 void Circle::calculatePoints() {
@@ -14,11 +14,11 @@ void Circle::calculatePoints() {
 	int y = leftTop->getY();
 	points.push_back(new Point(x, y));
 	// rightBottom, casted to int.
-	points.push_back(new Point((int)x + (2*radius), (int)y + (2*radius)));
+	points.push_back(new Point(x + ((int)(2*radius)), y + ((int)(2*radius))));
 }
 
 void Circle::calculatePerimeter() {
-	perimeter = M_PI * (2*radius);
+	perimeter = (float)M_PI * (2*radius);
 }
 
 

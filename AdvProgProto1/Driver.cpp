@@ -36,11 +36,22 @@ int main()
 			token = strtok_s(NULL, " ", &next_token);
 		}
 
+		string command;
+		try
+		{
+			parameters.size() == 0 ? throw command : command = parameters[0];
+		}
+		catch (string e)
+		{
+			command = e;
+			cout << "No compatable command entered" << endl;
+		}
+		
 		// implement a string tokenizer to populate the parameters vector 
 		// check function strtok_s
 
 		// as a result of the process, parameters[0] should hold your command, followed by your parameters 
-		string command = parameters[0];
+		
 
 		int x, y;
 		// in the following code, consider checking for the arguments.
@@ -57,11 +68,9 @@ int main()
 				Rectangle* r = new Rectangle(x, y, h, w);
 				shapes.push_back(r);
 
-				r->toString();
+				cout << r;
 			}
-			else {
-				cout << "Requires x, y, height, width as paramaters. please retry." << endl;
-			}
+			
 			// cout overload here; 
 		}
 
@@ -72,7 +81,6 @@ int main()
 			int e = stoi(parameters[3].c_str());
 			Square* s = new Square(x, y, e);
 			shapes.push_back(s);
-			s->toString();
 			cout << s;
 		}
 
@@ -83,26 +91,15 @@ int main()
 			int r = stoi(parameters[3].c_str());
 			Circle* c = new Circle(x, y, r);
 			shapes.push_back(c);
-			c->toString();
 			cout << c;
-			// cout << c->toString();
 
 		}
 
 		else if (command.compare("scale") == 0) {
 			int index = stoi(parameters[1].c_str());
-			float scaleX = stoi(parameters[2].c_str());
-			float scaleY = stoi(parameters[3].c_str());
-
-			int error = 0;
-			try
-			{
+			float scaleX = stof(parameters[2].c_str());
+			float scaleY = stof(parameters[3].c_str());
 				Shape* s = (shapes[index - 1]);
-
-				if (index-1 < 0 )
-				{
-					throw (error);
-				}
 
 				if (dynamic_cast<Square*>(s) != NULL)
 				{
@@ -114,25 +111,17 @@ int main()
 					dynamic_cast<Rectangle*>(s)->scale(scaleX, scaleY);
 				}
 				else if (dynamic_cast<Circle*>(s) != NULL) {
+					cout << "Scaling object Circle...\n";
 					dynamic_cast<Circle*>(s)->scale(scaleX, scaleY);
 				}
 
 				// check what type of shape, then scale
 
-				//s->scale(scaleX, scaleY);
-				//shapes[index - 1]->toString();
-				cout << shapes[index - 1];
-			}
-			catch (int error) {
-				cout << " cannot access member at location :" << index - 1 << "." << endl;
-			}
-			catch(...)
-			{
-				cout << " cannot access member at location :" << index-1 << "." << endl;
+				s->toString();
 			}
 			
 
-		}
+		
 
 		else if (command.compare("move") == 0) {
 			// move object at index 
@@ -163,6 +152,11 @@ int main()
 		cout << endl << endl;
 		*/
 		parameters.clear();
+	}
+	
+	for (int i = 0; i != shapes.size(); i++)
+	{
+		delete shapes[i];
 	}
 
 	cout << "Press any key to continue...";

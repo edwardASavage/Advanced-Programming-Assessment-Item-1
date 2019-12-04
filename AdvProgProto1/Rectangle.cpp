@@ -5,7 +5,7 @@ using namespace std;
 
 
 void Rectangle::calculateArea() {
-	area = (double)height * (double)width;
+	area = height * width;
 }
 
 void Rectangle::calculatePoints() {
@@ -24,7 +24,7 @@ void Rectangle::calculatePoints() {
 }
 
 void Rectangle::calculatePerimeter() {
-	perimeter = (((double)height * 2) + ((double)width * 2));
+	perimeter = ((height * 2) + (width * 2));
 }
 
 void Rectangle::toString() {
@@ -58,8 +58,18 @@ Rectangle::Rectangle(int x, int y, int h, int w) : height(h), width(w){
 
 }
 
+Rectangle::~Rectangle()
+{
+
+	cout << "Rectangle destroyed";
+}
+
 ostream& operator<<(ostream& out, Rectangle* r)
 {
+	r->calculatePoints();
+	r->calculateArea();
+	r->calculatePerimeter();
+
 	out << "Rectangle[h=" << r->height << ",w=" << r->width << "]"
 		<< "\npoints[("
 		<< r->points[0]->getX() << "," << r->points[0]->getY() << ")("

@@ -10,8 +10,10 @@ void Circle::calculateArea() {
 }
 
 void Circle::calculatePoints() {
+
 	int x = leftTop->getX();
 	int y = leftTop->getY();
+	points.clear();
 	points.push_back(new Point(x, y));
 	// rightBottom, casted to int.
 	points.push_back(new Point(x + ((int)(2*radius)), y + ((int)(2*radius))));
@@ -23,13 +25,13 @@ void Circle::calculatePerimeter() {
 
 
 void Circle::toString() {
+
 	calculatePoints();
 	calculateArea();
 	calculatePerimeter();
 
-	cout << "Circle[r=" << radius << "]"
+	cout << "\nCircle[r=" << radius << "]"
 		<< "\npoints[("
-
 		<< points[0]->getX() << "," << points[0]->getY() << ")("
 		<< points[1]->getX() << "," << points[1]->getY() << ")]"
 		<< "\narea=" << area << " Perimeter=" << perimeter << endl;
@@ -50,7 +52,7 @@ void Circle::scale(float scaleX, float scaleY) {
 
 }
 
-Circle::Circle(int x, int y, int r) : radius(r) {
+Circle::Circle(int x, int y, float r) : radius(r) {
 	leftTop->setX(x);
 	leftTop->setY(y);
 }
@@ -62,9 +64,8 @@ ostream& operator<<(ostream& out,  Circle* c)
 	c->calculateArea();
 	c->calculatePerimeter();
 
-	out << "Circle[r=" << c->radius << "]"
+	out << "\nCircle[r=" << c->radius << "]"
 		<< "\npoints[("
-
 		<< c->points[0]->getX() << "," << c->points[0]->getY() << ")("
 		<< c->points[1]->getX() << "," << c->points[1]->getY() << ")]"
 		<< "\narea=" << c->area << " Perimeter=" << c->perimeter << "\n" << endl;

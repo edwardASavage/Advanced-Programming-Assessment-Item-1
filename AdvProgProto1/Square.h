@@ -5,7 +5,7 @@
 
 class Square : public Shape, public Movable {
 private:
-	double edge;
+	float edge;
 public:
 
 	void calculateArea();
@@ -16,6 +16,6 @@ public:
 	void scale(float scaleX, float scaleY);
 	friend ostream& operator << (ostream& out, Square* s);
 
-	Square(int x, int y, int edge);
+	Square(int x, int y, float edge);
 
 };

@@ -5,12 +5,12 @@ using namespace std;
 
 
 
-Square::Square(int x, int y, int e) : edge(e) {
+Square::Square(int x, int y, float e) : edge(e) {
 	leftTop->setX(x);
 	leftTop->setY(y);
 }
 
-void Square::calculateArea() { area = (double)edge * (double)edge; };
+void Square::calculateArea() { area = edge * edge; };
 
 void Square::calculatePerimeter() { perimeter = edge * 4; }
 
@@ -37,12 +37,12 @@ void Square::calculatePoints() {
 	points.push_back(new Point(x, y));
 
 	// rightTop
-	points.push_back(new Point(x + edge, y));
+	points.push_back(new Point(x + (int)edge, y));
 
 	//rightBottom
-	points.push_back(new Point(x + edge, y + edge));
+	points.push_back(new Point(x + (int)edge, y + (int)edge));
 	//leftBottom
-	points.push_back(new Point(x, y + edge));
+	points.push_back(new Point(x, y + (int)edge));
 }
 
 void Square::toString() {
@@ -64,7 +64,7 @@ ostream& operator << (ostream& out, Square* s)
 	s->calculatePoints();
 	s->calculateArea();
 	s->calculatePerimeter();
-	out << "Square[e=" << s->edge << "]"
+	out << "\nSquare[e=" << s->edge << "]"
 		<< "\npoints[("
 		<< s->points[0]->getX() << "," << s->points[0]->getY() << ")("
 		<< s->points[1]->getX() << "," << s->points[1]->getY() << ")("

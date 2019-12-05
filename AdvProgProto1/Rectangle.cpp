@@ -16,11 +16,11 @@ void Rectangle::calculatePoints() {
 	// leftTop
 	points.push_back(new Point(x, y));
 	// rightTop
-	points.push_back(new Point(x + width, y));
+	points.push_back(new Point(x + (int)width, y));
 	//rightBottom
-	points.push_back(new Point(x + width, y + height));
+	points.push_back(new Point(x + (int)width, y + (int)height));
 	//leftBottom
-	points.push_back(new Point(x , y + height));
+	points.push_back(new Point(x , y + (int)height));
 }
 
 void Rectangle::calculatePerimeter() {
@@ -32,15 +32,13 @@ void Rectangle::toString() {
 	calculateArea();
 	calculatePerimeter();
 
-	cout << "Rectangle[h=" << height << ",w=" << width << "]"
+	cout << "\nRectangle[h=" << height << ",w=" << width << "]"
 		<< "\npoints[("
 		<< points[0]->getX() << "," << points[0]->getY() << ")("
 		<< points[1]->getX() << "," << points[1]->getY() << ")("
 		<< points[2]->getX() << "," << points[2]->getY() << ")("
-		<< points[3]->getX() << "," << points[3]->getY() << ")]"
-		<< "\narea=" << area << " Perimeter=" << perimeter << endl;
-
-		cout << "" << endl;
+		<< points[3]->getX() << "," << points[3]->getY() << ")]" << endl;
+		
 }
 void Rectangle::move(int newX, int newY) {
 
@@ -52,17 +50,12 @@ void Rectangle::scale(float scaleX, float scaleY) {
 	height *= scaleX;
 }
 
-Rectangle::Rectangle(int x, int y, int h, int w) : height(h), width(w){
+Rectangle::Rectangle(int x, int y, float h, float w) : height(h), width(w){
 	leftTop->setX(x);
 	leftTop ->setY(y);
 
 }
 
-Rectangle::~Rectangle()
-{
-
-	cout << "Rectangle destroyed";
-}
 
 ostream& operator<<(ostream& out, Rectangle* r)
 {
@@ -70,13 +63,13 @@ ostream& operator<<(ostream& out, Rectangle* r)
 	r->calculateArea();
 	r->calculatePerimeter();
 
-	out << "Rectangle[h=" << r->height << ",w=" << r->width << "]"
+	out << "\nRectangle[h=" << r->height << ",w=" << r->width << "]"
 		<< "\npoints[("
 		<< r->points[0]->getX() << "," << r->points[0]->getY() << ")("
 		<< r->points[1]->getX() << "," << r->points[1]->getY() << ")("
 		<< r->points[2]->getX() << "," << r->points[2]->getY() << ")("
-		<< r->points[3]->getX() << "," << r->points[3]->getY() << ")]"
-		<< "\narea=" << r->area << " Perimeter=" << r->perimeter << endl;
+		<< r->points[3]->getX() << "," << r->points[3]->getY() << ")]\n"
+		<< "area=" << r->area << " Perimeter=" << r->perimeter << endl;
 
 	return out;
 }

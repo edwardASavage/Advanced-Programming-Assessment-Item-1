@@ -14,20 +14,17 @@ int main()
 	string userCommand;
 	vector <Shape*> shapes;     // this one will hold your shapes
 	vector <string> parameters; // this one will hold parameters for the commands
-
-
-
+	
+	cout << "Command list:\n\n"
+		<< "addR(int X,  int Y, float height, float width)\n"
+		<< "addS(int X, int Y, float edge)\n"
+		<< "addC(int X, int Y, float radius\n"
+		<< "move(int object-location, int new-X, int new-Y)\n"
+		<< "scale(int object-location, float scale-X, float scale-Y)\n"
+		<< "display()\n" << endl;
 
 	while (userCommand.compare("exit") != 0)
 	{
-		cout << "Command list:\n"
-			<< "addR(int X,  int Y, float height, float width)\n"
-			<< "addS(int X, int Y, float edge)\n"
-			<< "addC(int X, int Y, float radius\n"
-			<< "move(int object-location, int new-X, int new-Y)\n"
-			<< "scale(int object-location, float scale-X, float scale-Y)\n"
-			<< "display()\n" << endl;
-
 		cout << "Enter the command: ";
 		getline(cin, userCommand);
 		char* cstr = new char[userCommand.length() + 1];
@@ -125,7 +122,7 @@ int main()
 				parameters.size() != 4 ? throw command :
 				x = stoi(parameters[1].c_str());
 				y = stoi(parameters[2].c_str());
-				float r = stoi(parameters[3].c_str());
+				float r = stof(parameters[3].c_str());
 				Circle* c = new Circle(x, y, r);
 				shapes.push_back(c);
 				cout << c;
@@ -134,7 +131,7 @@ int main()
 			{
 				parameters.size() > 4 ? cout << "too many parameters entered." << endl
 					: cout << "too few parameters entered." << endl;
-				cout << "proper use: " << "addC(int X, int Y, float radius\n" << endl;
+				cout << "proper use: " << "addC(int X, int Y, float radius)\n" << endl;
 			}		
 		}
 
@@ -145,7 +142,7 @@ int main()
 
 			try
 			{
-				if (index - 1 <= -1 || index - 1 > shapes.size())
+				if (index - 1 <= -1 || index - 1 > (int)shapes.size())
 				{
 					throw 0;
 				}
@@ -154,21 +151,22 @@ int main()
 				// check the object type before applying scale.
 				if (dynamic_cast<Square*>(s) != NULL)
 				{
-					cout << "Scaling object Square...\n";
+					cout << "Scaling object Square...\n" << endl;;
 					dynamic_cast<Square*>(s)->scale(scaleX, scaleY);
+					
 				}
 				else if (dynamic_cast<Rectangle*>(s) != NULL) {
-					cout << "Scaling object Rectangle...\n";
+					cout << "Scaling object Rectangle...\n" << endl;
 					dynamic_cast<Rectangle*>(s)->scale(scaleX, scaleY);
+					
 				}
 				else if (dynamic_cast<Circle*>(s) != NULL) {
 					cout << "Scaling object Circle...\n";
 					dynamic_cast<Circle*>(s)->scale(scaleX, scaleY);
+				
 				}
-				// output scaled object using 
-				cout << s;
-				// delete pointer.
-				delete s;
+				// output scaled object
+				s->toString();
 			}
 			catch (int e)
 			{
@@ -177,14 +175,7 @@ int main()
 					<< "scale(int object-location, float scale-X, float scale-Y)\n" << endl;
 			}
 		}
-			
-
-		
-
 		else if (command.compare("move") == 0) {
-			// move object at index 
-			
-			
 			try
 			{
 				if (parameters.size() != 4)
@@ -199,16 +190,14 @@ int main()
 				int newY = stoi(parameters[3].c_str());
 
 
-				if (shapeNo-1 <= -1 || shapeNo-1 > shapes.size())
+				if (shapeNo-1 <= -1 || shapeNo-1 > (int)shapes.size())
 				{
 					cout << "object location invalid! \n" << endl;
 					throw 0;
 				}
-
+				// downcast pointer to enable moving.
 				Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
-				
 				m->move(newX, newY);
-
 				shapes[shapeNo - 1]->toString();
 
 			}

@@ -58,11 +58,6 @@ Rectangle::Rectangle(int x, int y, float h, float w) : height(h), width(w){
 
 }
 
-Rectangle::~Rectangle()
-{
-
-	cout << "Rectangle destroyed";
-}
 
 ostream& operator<<(ostream& out, Rectangle* r)
 {

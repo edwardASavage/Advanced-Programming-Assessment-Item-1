@@ -1,5 +1,14 @@
-﻿  Rectangle.cpp
+﻿  Circle.cpp
+  Driver.cpp
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(110,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(129,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(149,38): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(197,34): warning C4018: '>': signed/unsigned mismatch
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(172,15): warning C4101: 'e': unreferenced local variable
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Driver.cpp(211,15): warning C4101: 'e': unreferenced local variable
+  Point.cpp
+  Rectangle.cpp
   Square.cpp
+C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Square.cpp(7,43): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating Code...
-C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\AdvProgProto1\Square.cpp(8,43): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   AdvProgProto1.vcxproj -> C:\Users\Edward\Documents\GitHub\AdvProgAssesment1\Debug\AdvProgProto1.exe

@@ -12,27 +12,28 @@ using namespace std;
 int main()
 {
 	string userCommand;
-	vector <Shape*> shapes;     // this one will hold your shapes
-	vector <string> parameters; // this one will hold parameters for the commands
+	vector <Shape*> shapes;   
+	vector <string> parameters; 
 
-
+	// present user with possible commands.
+	cout << "Command list:\n"
+		<< "addR(int X,  int Y, float height, float width)\n"
+		<< "addS(int X, int Y, float edge)\n"
+		<< "addC(int X, int Y, float radius\n"
+		<< "move(int object-location, int new-X, int new-Y)\n"
+		<< "scale(int object-location, float scale-X, float scale-Y)\n"
+		<< "display()\n" << endl;
 
 
 	while (userCommand.compare("exit") != 0)
 	{
-		cout << "Command list:\n"
-			<< "addR(int X,  int Y, float height, float width)\n"
-			<< "addS(int X, int Y, float edge)\n"
-			<< "addC(int X, int Y, float radius\n"
-			<< "move(int object-location, int new-X, int new-Y)\n"
-			<< "scale(int object-location, float scale-X, float scale-Y)\n"
-			<< "display()\n" << endl;
-
 		cout << "Enter the command: ";
 		getline(cin, userCommand);
 		char* cstr = new char[userCommand.length() + 1];
 		strcpy_s(cstr, userCommand.length() + 1, userCommand.c_str());
 
+
+		// tokenizer for userCommand -> parameters vector.
 		char* next_token;
 		char* token = strtok_s(cstr, " ", &next_token);
 
@@ -73,10 +74,12 @@ int main()
 			cout << "No compatable command entered, please check command list. \n" << endl;
 		}
 
+		// declaration for multi-use variables.
 		int x, y;
 		if (command.compare("addR") == 0) {
 			try
 			{
+				// if user enters too many or too few paramaters, throw error.
 				parameters.size() != 5 ? throw command:
 				x = stoi(parameters[1].c_str());
 				y = stoi(parameters[2].c_str());
@@ -84,6 +87,7 @@ int main()
 				float w = stof(parameters[4].c_str());
 				Rectangle* r = new Rectangle(x, y, h, w);
 				shapes.push_back(r);
+				// cout << overload.
 				cout << r;
 			}
 			catch (string e)
@@ -93,9 +97,6 @@ int main()
 				cout << "proper use: " << "addR(int X,  int Y, float height, float width)\n" << endl;
 			}
 
-				
-			
-			// cout overload here; 
 		}
 
 		else if (command.compare("addS") == 0) {
@@ -151,24 +152,22 @@ int main()
 				}
 
 				Shape* s = (shapes[index - 1]);
-				// check the object type before applying scale.
+				// check the object type, then applying scale.
 				if (dynamic_cast<Square*>(s) != NULL)
 				{
-					cout << "Scaling object Square...\n";
+					cout << "\nScaling object Square...\n";
 					dynamic_cast<Square*>(s)->scale(scaleX, scaleY);
 				}
 				else if (dynamic_cast<Rectangle*>(s) != NULL) {
-					cout << "Scaling object Rectangle...\n";
+					cout << "\nScaling object Rectangle...\n";
 					dynamic_cast<Rectangle*>(s)->scale(scaleX, scaleY);
 				}
 				else if (dynamic_cast<Circle*>(s) != NULL) {
-					cout << "Scaling object Circle...\n";
+					cout << "\nScaling object Circle...\n";
 					dynamic_cast<Circle*>(s)->scale(scaleX, scaleY);
 				}
-				// output scaled object using 
-				cout << s;
-				// delete pointer.
-				delete s;
+				// output scaled object using standard toString method (without cout << overload).
+				s->toString();
 			}
 			catch (int e)
 			{
@@ -178,13 +177,8 @@ int main()
 			}
 		}
 			
-
-		
-
 		else if (command.compare("move") == 0) {
 			// move object at index 
-			
-			
 			try
 			{
 				if (parameters.size() != 4)
@@ -194,22 +188,24 @@ int main()
 					throw 0;
 				}
 
-				int shapeNo = stoi(parameters[1].c_str());
+				
+				int index = stoi(parameters[1].c_str());
 				int newX = stoi(parameters[2].c_str());
 				int newY = stoi(parameters[3].c_str());
 
-
-				if (shapeNo-1 <= -1 || shapeNo-1 > shapes.size())
+				// ensure index is within bounds.
+				if (index-1 <= -1 || index-1 > shapes.size())
 				{
 					cout << "object location invalid! \n" << endl;
 					throw 0;
 				}
 
-				Movable* m = dynamic_cast<Movable*>(shapes[shapeNo - 1]);
-				
+				// downcast to enable moving of leftTop.
+				Movable* m = dynamic_cast<Movable*>(shapes[index - 1]);
+				// apply move.
 				m->move(newX, newY);
-
-				shapes[shapeNo - 1]->toString();
+				// tostring standard output.
+				shapes[index - 1]->toString();
 
 			}
 			catch (int e)
@@ -219,8 +215,10 @@ int main()
 
 			
 		}
+
 		else if (command.compare("display") == 0) {
 
+			// basic handle for display with no object calls.
 			if (shapes.size() == 0)
 			{
 				cout << "No shapes to display! \n" << endl;
@@ -231,13 +229,10 @@ int main()
 				shapes[i]->toString();
 			}
 		}
+
 		parameters.clear();
 	}
 	
-	
-
-
-
 
 	cout << "Press any key to continue...";
 	std::getchar();

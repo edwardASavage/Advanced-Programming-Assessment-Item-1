@@ -16,7 +16,7 @@ public:
 	void move(int newX, int newY);
 	void scale(float scaleX, float scaleY);
 
-	Rectangle(int x, int y, int height, int width);
+	Rectangle(int x, int y, float height, float width);
 	~Rectangle();
 
 	friend ostream& operator<<(ostream& out, Rectangle* s);

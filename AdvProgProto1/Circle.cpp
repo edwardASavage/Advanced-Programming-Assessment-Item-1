@@ -10,6 +10,8 @@ void Circle::calculateArea() {
 }
 
 void Circle::calculatePoints() {
+	// empty points.
+	points.clear();
 	int x = leftTop->getX();
 	int y = leftTop->getY();
 	points.push_back(new Point(x, y));
@@ -50,7 +52,7 @@ void Circle::scale(float scaleX, float scaleY) {
 
 }
 
-Circle::Circle(int x, int y, int r) : radius(r) {
+Circle::Circle(int x, int y, float r) : radius(r) {
 	leftTop->setX(x);
 	leftTop->setY(y);
 }

@@ -16,7 +16,7 @@ public:
 	void scale(float scaleX, float scaleY);
 	friend ostream& operator << (ostream& out, Circle* c);
 
-	Circle(int x, int y, int radius);
+	Circle(int x, int y, float radius);
 
 	
 
